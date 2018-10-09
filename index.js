@@ -22,7 +22,6 @@ function PrivateKeyProvider(providerUrl) {
 }
 
 PrivateKeyProvider.prototype.sendAsync = function() {
-    //console.log('Engine: ', this.engine);
     if (arguments[0].params && arguments[0].params.length > 0 && arguments[0].params[0].fromPvk) {
 
         const privateKey = arguments[0].params[0].fromPvk;
@@ -36,7 +35,6 @@ PrivateKeyProvider.prototype.sendAsync = function() {
 };
 
 PrivateKeyProvider.prototype.send = function() {
-    //console.log('Engine: ', this.engine);
     if (arguments[0].params && arguments[0].params.length > 0 && arguments[0].params[0].fromPvk) {
 
         const privateKey = arguments[0].params[0].fromPvk;
