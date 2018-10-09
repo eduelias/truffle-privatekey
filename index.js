@@ -1,9 +1,9 @@
+const Web3 = require("web3");
+const EthereumjsWallet = require('ethereumjs-wallet');
 const ProviderEngine = require("web3-provider-engine");
 const FiltersSubprovider = require('web3-provider-engine/subproviders/filters.js');
 const WalletSubprovider = require('web3-provider-engine/subproviders/wallet.js');
 const ProviderSubprovider = require("web3-provider-engine/subproviders/provider.js");
-const EthereumjsWallet = require('ethereumjs-wallet');
-const Web3 = require("web3");
 const NonceSubprovider = require('web3-provider-engine/subproviders/nonce-tracker.js');
 
 function PrivateKeyProvider(providerUrl) {
@@ -12,9 +12,9 @@ function PrivateKeyProvider(providerUrl) {
     this.engine.addProvider(new FiltersSubprovider());
     this.engine.addProvider(new NonceSubprovider());
 
-    // HACK: `sendAsync` was removed
+    // Work around: `sendAsync` was removed
     if (!Web3.providers.HttpProvider.prototype.sendAsync) {
-        Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send
+        Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
     }
 
     this.engine.addProvider(new ProviderSubprovider(new Web3.providers.HttpProvider(providerUrl)));
@@ -44,6 +44,5 @@ PrivateKeyProvider.prototype.send = function() {
     }
     return this.engine.send.apply(this.engine, arguments);
 };
-
 
 module.exports = PrivateKeyProvider;
