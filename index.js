@@ -29,7 +29,6 @@ PrivateKeyProvider.prototype.sendAsync = function() {
         this.address = "0x" + this.wallet.getAddress().toString("hex");
 
         this.engine.addProvider(new WalletSubprovider(this.wallet, {}));
-        console.log('Arguments: ', arguments[0].params[0].fromPvk);
     }
     this.engine.sendAsync.apply(this.engine, arguments);
 };
@@ -42,7 +41,6 @@ PrivateKeyProvider.prototype.send = function() {
         this.address = "0x" + this.wallet.getAddress().toString("hex");
 
         this.engine.addProvider(new WalletSubprovider(this.wallet, {}));
-        console.log('Arguments: ', arguments[0].params[0].fromPvk);
     }
     return this.engine.send.apply(this.engine, arguments);
 };
